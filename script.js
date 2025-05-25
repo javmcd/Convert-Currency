@@ -2,17 +2,18 @@ const fromCurrency = document.getElementById('from-currency');
 const toCurrency = document.getElementById('to-currency');
 const resultDiv = document.getElementById('result');
 
-async function populateCurrencies() {
-  const res = await fetch('https://api.exchangerate.host/symbols');
-  const data = await res.json();
-  const symbols = data.symbols;
+// Hardcoded currency list
+const currencies = [
+  "USD", "EUR", "GBP", "CAD", "AUD", "JPY", "INR", "ZAR", "CNY", "KRW"
+];
 
-  for (let code in symbols) {
+function populateCurrencies() {
+  currencies.forEach(code => {
     const option1 = new Option(code, code);
     const option2 = new Option(code, code);
     fromCurrency.add(option1.cloneNode(true));
     toCurrency.add(option2.cloneNode(true));
-  }
+  });
 
   fromCurrency.value = 'USD';
   toCurrency.value = 'EUR';
